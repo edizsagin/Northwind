@@ -1,0 +1,319 @@
+<mvc:View
+    controllerName="northwind.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+>
+    <Page
+        id="page" 
+        title="{i18n>title}"
+        showHeader="false"
+        showFooter="false"
+        showNavButton="false"
+    >
+        <content>
+            <smartFilterBar:SmartFilterBar
+                id="idSmartFilterBar"
+                persistencyKey="SmartFilterPKey"
+                entitySet="Products"
+                enableBasicSearch="false"
+                beforeVariantFetch="onBeforeVariantFetch"
+                afterVariantLoad="onAfterVariantLoad"
+                useDateRangeType="true"
+            >
+                <smartFilterBar:controlConfiguration>
+                    <smartFilterBar:ControlConfiguration
+                        label="Product Name"
+                        key="ProductName"
+                        visibleInAdvancedArea="true"
+                    >
+                        <smartFilterBar:customControl>
+                            <Input id="inpProductName" />
+                        </smartFilterBar:customControl>
+                    </smartFilterBar:ControlConfiguration>
+                    <smartFilterBar:ControlConfiguration
+                        label="Product ID"
+                        key="ProductID"
+                        visibleInAdvancedArea="true"
+                    >
+                        <smartFilterBar:customControl>
+                            <Input
+                                id="inpProductID"
+                                valueHelpOnly="false"
+                                showValueHelp="false"
+                            />
+                        </smartFilterBar:customControl>
+                    </smartFilterBar:ControlConfiguration>
+                    <smartFilterBar:ControlConfiguration
+                        label="Category ID"
+                        key="CategoryID"
+                        visibleInAdvancedArea="true"
+                    >
+                        <smartFilterBar:customControl>
+                            <MultiComboBox
+                                id="inpCategoryID"
+                                width="350px"
+                                items="{
+                                    path: '/Categories'
+                                }"
+                            >
+                                <core:Item
+                                    key="{CategoryID}"
+                                    text="{CategoryName}"
+                                />
+                            </MultiComboBox>
+                        </smartFilterBar:customControl>
+                    </smartFilterBar:ControlConfiguration>
+                    <smartFilterBar:ControlConfiguration
+                        key="Discontinued"
+                        label="Sort By Discontinued"
+                        visibleInAdvancedArea="true"
+                    >
+                        <smartFilterBar:customControl>
+                            <CheckBox id="chkDiscontinued" />
+                        </smartFilterBar:customControl>
+                    </smartFilterBar:ControlConfiguration>
+                    <smartFilterBar:ControlConfiguration
+                        key="UnitsOnOrder"
+                        label="Switch Units On Order"
+                        visibleInAdvancedArea="true"
+                    >
+                        <smartFilterBar:customControl>
+                            <Switch
+                                id="swchUnOr"
+                                state="false"
+                            >
+                                <layoutData>
+                                    <FlexItemData growFactor="1" />
+                                </layoutData>
+                            </Switch>
+                        </smartFilterBar:customControl>
+                    </smartFilterBar:ControlConfiguration>
+                </smartFilterBar:controlConfiguration>
+            </smartFilterBar:SmartFilterBar>
+            <smartTable:SmartTable
+                smartFilterId="idSmartFilterBar"
+                tableType="ResponsiveTable"
+                showVariantManagement="false"
+                beforeRebindTable="onBeforeRebindTable"
+                entitySet="Products"
+                useVariantManagement="true"
+                useTablePersonalisation="true"
+                showRowCount="true"
+                enableAutoBinding="true"
+                showFullScreenButton="true"
+                header="{i18n>title}"
+                backgroundDesign="Transparent"
+                useDateRangeType="true"
+                liveMode="true"
+                useToolbar="false"
+                showFilterConfiguration="false"
+            >
+                <Table
+                    id="idTable"
+                    sticky="ColumnHeaders"
+                    growingScrollToLoad="2"
+                >
+                    <columns>
+                        <Column width="8rem">
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey": "ProductID", "columnIndex":"0", "sortProperty":"ProductID", "leadingProperty": "ProductID" }'
+                                />
+                            </customData>
+                            <Text
+                                text="Product ID"
+                                wrapping="true"
+                            />
+                        </Column>
+                        <Column>
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey": "ProductName", "columnIndex":"1", "sortProperty":"ProductName", "leadingProperty": "ProductName" }'
+                                />
+                            </customData>
+                            <Text
+                                text="Product Name"
+                                wrapping="true"
+                                textAlign="Center"
+                            />
+                        </Column>
+                        <Column
+                            minScreenWidth="Small"
+                            demandPopin="true"
+                            popinDisplay="Inline"
+                        >
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey": "CategoryID", "columnIndex":"2", "sortProperty":"CategoryID", "leadingProperty": "CategoryID" }'
+                                />
+                            </customData>
+                            <Text
+                                text="Category ID"
+                                wrapping="true"
+                                textAlign="Center"
+                            />
+                        </Column>
+                        <Column>
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey": "SupplierID", "columnIndex":"3", "sortProperty":"SupplierID", "leadingProperty": "SupplierID" }'
+                                />
+                            </customData>
+                            <Text
+                                text="Supplier ID"
+                                wrapping="true"
+                                textAlign="Center"
+                            />
+                        </Column>
+                        <Column>
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey": "QuantityPerUnit", "columnIndex":"4", "sortProperty":"QuantityPerUnit", "leadingProperty": "QuantityPerUnit" }'
+                                />
+                            </customData>
+                            <Text
+                                text="Quantity Per Unit"
+                                wrapping="true"
+                                textAlign="Center"
+                            />
+                        </Column>
+                        <Column
+                            minScreenWidth="Small"
+                            demandPopin="true"
+                            popinDisplay="Inline"
+                        >
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey": "UnitPrice", "columnIndex":"5", "sortProperty":"UnitPrice", "leadingProperty": "UnitPrice" }'
+                                />
+                            </customData>
+                            <Text
+                                text="Unit Price"
+                                wrapping="true"
+                                textAlign="Center"
+                            />
+                        </Column>
+                        <Column>
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey": "UnitsInStock ", "columnIndex":"6", "sortProperty":"UnitsInStock", "leadingProperty": "UnitsInStock" }'
+                                />
+                            </customData>
+                            <Text
+                                text="Units In Stock"
+                                wrapping="true"
+                                textAlign="Center"
+                            />
+                        </Column>
+                        <Column>
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey": "UnitsOnOrder", "columnIndex":"7", "sortProperty":"UnitsOnOrder", "leadingProperty": "UnitsOnOrder" }'
+                                />
+                            </customData>
+                            <Text
+                                text="Units On Order"
+                                wrapping="true"
+                                textAlign="Center"
+                            />
+                        </Column>
+                        <Column>
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey": "ReorderLevel ", "columnIndex":"8", "sortProperty":"ReorderLevel", "leadingProperty": "ReorderLevel" }'
+                                />
+                            </customData>
+                            <Text
+                                text="Reorder Level"
+                                wrapping="true"
+                                textAlign="Center"
+                            />
+                        </Column>
+                        <Column>
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey": "Discontinued ", "columnIndex":"9", "sortProperty":"Discontinued", "leadingProperty": "Discontinued" }'
+                                />
+                            </customData>
+                            <Text
+                                text="Discontinued"
+                                wrapping="true"
+                                textAlign="Center"
+                            />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem
+                            type="Navigation"
+                            press="onPressDetail"
+                        >
+                            <cells>
+                                <ObjectNumber number="{ProductID}" />
+                                <ObjectStatus
+                                    text="{ProductName}"
+                                    state="Information"
+                                />
+                                <!-- objectstatus daha ince yazı stili objectnumber a göre. Eeğr bunları eklemezsem normal text olarak da yazabilirim
+                                 objectnumber valueda sayı varsa objectstatus ise string value varsa objectidintifier de bolt yazar kalın yazar -->
+                                <ObjectStatus
+                                    state="{
+                                        parts: [{
+                                            path: 'CategoryID'
+                                        }],
+                                        formatter: '.formatter.iconColorChange'
+                                    }"
+                                    text="{CategoryID}"
+                                    icon="{
+                                        parts: [{
+                                            path: 'CategoryID'
+                                        }],
+                                        formatter: '.formatter.iconFormatChange'
+                                    }"
+                                />
+                                <ObjectNumber number="{SupplierID}" />
+                                <ObjectStatus text="{QuantityPerUnit}" />
+                                <ObjectNumber
+                                    number="{
+                                        parts: [{
+                                            path: 'UnitPrice'
+                                        }],
+                                        formatter: '.formatter.priceFormatted'
+                                    }"
+                                    state="{
+                                        parts: [{
+                                            path: 'UnitPrice'
+                                        }],
+                                        formatter: '.formatter.unitPriceStateFormat'
+                                    }"
+                                />
+                                <ObjectNumber number="{UnitsInStock}" />
+                                <ObjectNumber number="{UnitsOnOrder}" />
+                                <ObjectNumber number="{ReorderLevel}" />
+                                <CheckBox
+                                    id="idCheckBox"
+                                    selected="{Discontinued}"
+                                />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </smartTable:SmartTable>
+        </content>
+    </Page>
+</mvc:View>
