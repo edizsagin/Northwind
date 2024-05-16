@@ -11,7 +11,7 @@
 >
     <Page
         id="page" 
-        title="{i18n>title}"
+        title="Dev"
         showHeader="false"
         showFooter="false"
         showNavButton="false"
